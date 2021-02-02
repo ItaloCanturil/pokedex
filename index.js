@@ -1,26 +1,32 @@
-function show () {
+function show() {
   fetch('https://pokeapi.co/api/v2/pokemon/')
-  .then(response => response.json())
-  .then(data => renderElements(data.results))
+    .then(response => response.json())
+    .then(data => renderElements(data.results));
 }
 
-show()
+show();
 
 function createElement(data) {
-  console.log(data)
-  const dados = data.map((item, index) => `
-  <div>
+  console.log(data);
+  const dados = data
+    .map(
+      (item, index) => `
+  <div class="item__card">
     <figure>
-      <img src="https://pokeres.bastionbot.org/images/pokemon/${index + 1}.png">
+      <img class="fig__poke" src="https://pokeres.bastionbot.org/images/pokemon/${
+        index + 1
+      }.png">
     </figure>
     <p>${item.name}</p>
   </div>
-  `).join('');
+  `,
+    )
+    .join('');
 
-  return dados
+  return dados;
 }
 
 function renderElements(data) {
-  const item = document.querySelector('.item')
-  item.innerHTML += createElement(data)
+  const item = document.querySelector('.item');
+  item.innerHTML += createElement(data);
 }
