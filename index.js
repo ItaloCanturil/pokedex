@@ -1,32 +1,43 @@
-function show() {
-  fetch('https://pokeapi.co/api/v2/pokemon/')
-    .then(response => response.json())
-    .then(data => renderElements(data.results));
+async function show() {
+  const list = await fetch(
+    'https://pokeapi.co/api/v2/pokemon?limit=100&offset=0',
+  ).then(response => response.json());
+  const pokemons = await Promise.all(
+    list.results.map(async item => {
+      const pokemon = await fetch(item.url).then(response => response.json());
+      pokemon.species = await fetch(pokemon.species.url).then(response =>
+        response.json(),
+      );
+      return pokemon;
+    }),
+  );
+  console.log(pokemons);
+  renderElements(pokemons);
 }
 
 show();
 
+function renderElements(data) {
+  const item = document.querySelector('.items');
+  item.innerHTML += createElement(data);
+}
+
 function createElement(data) {
-  console.log(data);
   const dados = data
     .map(
-      (item, index) => `
-  <div class="item__card">
+      pokemon => `
+  <div class="items__card">
     <figure>
-      <img class="fig__poke" src="https://pokeres.bastionbot.org/images/pokemon/${
-        index + 1
-      }.png">
+      <img class="fig__poke" src="${pokemon.sprites.front_default}">
     </figure>
-    <p>${item.name}</p>
+    <p>${pokemon.name}</p>
+    <p>${pokemon.species.egg_groups
+      .map(item => item.name)
+      .filter(item => item !== 'monster')}</p>
   </div>
   `,
     )
     .join('');
 
   return dados;
-}
-
-function renderElements(data) {
-  const item = document.querySelector('.item');
-  item.innerHTML += createElement(data);
 }
