@@ -13,7 +13,7 @@ body {
 
 .items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
   margin-top: 50px;
   width: 100%;
@@ -21,11 +21,11 @@ body {
 .items__card {
   background: #dbe7e4;
   border-radius: 10px;
+  box-shadow: 3px 3px 5px black;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  flex-direction: column;
-  height: 200px;
+  height: 150px;
   width: 100%;
   text-align: center;
 }
@@ -33,6 +33,23 @@ body {
 .fig__poke {
   width: 100px;
   height: 100px;
+}
+
+.org__name {
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.race {
+  margin: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.race-grass {
+  color: green;
 }
 
 @media (max-width: 1200px) {
