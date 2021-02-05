@@ -11,14 +11,15 @@ async function show() {
       return pokemon;
     }),
   );
-  console.log(pokemons);
   renderElements(pokemons);
+  search(pokemons);
 }
 
 show();
 
 function renderElements(data) {
   const item = document.querySelector('.items');
+  item.innerHTML = '';
   item.innerHTML += createElement(data);
 }
 
@@ -46,4 +47,14 @@ function createElement(data) {
     .join('');
 
   return dados;
+}
+
+function search(data) {
+  const $search = document.querySelector('.search');
+  $search.addEventListener('input', e => {
+    const searchPokemons = data.filter(elements =>
+      elements.name.includes(e.target.value.toLowerCase()),
+    );
+    renderElements(searchPokemons);
+  });
 }
