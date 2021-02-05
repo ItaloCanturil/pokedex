@@ -1,6 +1,6 @@
 async function show() {
   const list = await fetch(
-    'https://pokeapi.co/api/v2/pokemon?limit=100&offset=0',
+    'https://pokeapi.co/api/v2/pokemon?limit=50&offset=0',
   ).then(response => response.json());
   const pokemons = await Promise.all(
     list.results.map(async item => {
@@ -26,15 +26,21 @@ function createElement(data) {
   const dados = data
     .map(
       pokemon => `
-  <div class="items__card">
-    <figure>
-      <img class="fig__poke" src="${pokemon.sprites.front_default}">
+  <section class="items__card">
+    <figure class="card__fig">
+      <img class="fig__poke" src="https://pokeres.bastionbot.org/images/pokemon/${
+        pokemon.id
+      }.png">
     </figure>
-    <p>${pokemon.name}</p>
-    <p>${pokemon.species.egg_groups
-      .map(item => item.name)
-      .filter(item => item !== 'monster')}</p>
-  </div>
+    <div class="card__org">
+      <p class="org__name">${pokemon.name}</p>
+      <p class="org__group">${pokemon.types
+        .map(
+          item =>
+            `<span class="race race-${item.type.name}">${item.type.name}</span>`,
+        )
+        .join('')}</p>
+  </section>
   `,
     )
     .join('');
