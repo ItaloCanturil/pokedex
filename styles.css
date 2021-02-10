@@ -58,6 +58,42 @@ body {
   color: green;
 }
 
+.race-ground {
+  color: #785123;
+}
+
+.race-water {
+  color: #30aac9;
+}
+
+.race-poison {
+  color: #865f7d;
+}
+
+.race-fire {
+  color: #e37338;
+}
+
+.race-fairy {
+  color: #dd8dc8;
+}
+
+.race-normal {
+  color: #ddbea9;
+}
+
+.race-bug {
+  color: #74c69d;
+}
+
+.race-flying {
+  color: #8ab8b5;
+}
+
+.race-electric {
+  color: #c2a852;
+}
+
 @media (max-width: 1200px) {
   .container {
     padding: 0 16px;
